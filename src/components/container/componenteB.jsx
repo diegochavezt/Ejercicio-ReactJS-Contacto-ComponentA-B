@@ -2,12 +2,14 @@ import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import Contacto from '../../models/class.contacto'
 
+
 const ComponenteB = ({contacto}) => {
 
-    const [conectado, setconectado] = useState(false);
+    const [conectado, setconectado] = useState(contacto.conectado);
 
-    const changeState = () => {
-        setconectado (!conectado);
+    const cambiarEstado = ()=> {
+        contacto.conectado = !contacto.conectado
+        setconectado(contacto.conectado)
     }
 
     return (
@@ -29,15 +31,18 @@ const ComponenteB = ({contacto}) => {
             </div>
             <div>
                 <h4>
-                    Estado en línea: { contacto.conectado ? 'En línea':'desconectado' }
+                    Estado en línea: { contacto.conectado ? 'Contacto en línea':'Contacto no disponible' }
                 </h4>
             </div>
             <div>
-                <button onClick={ changeState }>Cambiar estado</button>
+                <button onClick={ cambiarEstado }>
+                    Cambiar estado
+                </button>
             </div>
         </div>
     );
 };
+
 
 ComponenteB.propTypes = {
     contacto: PropTypes.instanceOf(Contacto)
